@@ -12,12 +12,22 @@
 
 #include "fractol.h"
 
-t_kolo init_kolo(t_kolo kolo)
+void	init_kolo(t_kolo *kolo)
 {
-	kolo.re_min = -2.0;
-	kolo.re_max = 2.0;
-	kolo.im_min = -2.0;
-	kolo.im_max = kolo.im_min + (kolo.re_max - kolo.re_min) * HEIGHT / WIDTH;
-    kolo.factor_re = (kolo.re_max - kolo.re_min) / (WIDTH - 1);
-    kolo.factor_im = (kolo.im_max - kolo.im_min) / (HEIGHT - 1);
+	kolo->re_min = -2.0;
+	kolo->re_max = 2.0;
+	kolo->im_min = -2.0;
+	kolo->im_max = kolo->im_min + (kolo->re_max - kolo->re_min) * HEIGHT / WIDTH;
+    kolo->factor_re = (kolo->re_max - kolo->re_min) / (WIDTH - 1);
+    kolo->factor_im = (kolo->im_max - kolo->im_min) / (HEIGHT - 1);
+}
+
+void	init_img(t_mlx *img)
+{
+	int bpp;
+	int line_len;
+	int endian;
+
+	img->img = 
+
 }

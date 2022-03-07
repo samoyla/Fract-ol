@@ -23,6 +23,10 @@ void	mandelbrot(t_cxnb z, t_cxnb c)
     t = 0;
     while (cn <= 4 && iter < MAX_ITER)
     {
-        
+        t = z.re;
+        z.re = pow(z.re, 2.0) - pow(z.im, 2.0 + c.im);
+        z.im = 2.0 * z.im * t + c.im;
+        cn = pow(z.re, 2.0) + pow(z.im, 2.0);
+        iter++;
     }
 }
