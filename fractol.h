@@ -13,13 +13,6 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define TITLE "Fractol"
-# define HEIGHT 1000
-# define WIDTH 1000
-//height and width are the size of a window, 
-//in order to avoid the distortion
-# define MAX_ITER 50
-
 # include "mlx/mlx.h"
 # include "colors.h"
 # include <stdlib.h>
@@ -27,12 +20,25 @@
 # include <errno.h>
 # include <math.h>
 
+# define TITLE "Fractol"
+# define HEIGHT 1000
+# define WIDTH 1000
+//height and width are the size of a window, 
+//in order to avoid the distortion
+# define MAX_ITER 50
+
 //fractals created
-enum	fractals
+typedef enum	e_set_name
 {
 	Mandelbrot,
 	Julia
-};
+}t_set_name;
+
+typedef enum e_bool
+{
+	False,
+	True
+}t_bool;
 
 //complex number
 typedef struct s_cxnb
@@ -43,35 +49,42 @@ typedef struct s_cxnb
 }t_cxnb;
 
 //mlx data about image
-typedef struct s_mlx
+typedef struct s_image
 {
 	void	*mlx_p;
 	void	*mlx_win;
 	void	*img;
 	char	*addr;
-	int		bpp; //bits_per_pixel
+	int		bpp; 
+	//bits_per_pixel
+	//is total number of bits stored for each pixel in a graphic image
 	int		line_len;
-	int		endian;
-}t_mlx;
+	int		endian; 
+	//the way_order the butes are read in computer memory
+}t_image;
 
-typedef struct s_kolo
+typedef struct s_fractal
 {
-	double	re_min;
-	double	re_max;
-	double	im_min;
-	double	im_max;
-	double	factor_re;
-	double	factor_im;
-}t_kolo;
+	t_image image;
+	t_cxnb	min;
+	t_cxnb	max;
+	t_cxnb	factor;
+	t_cxnb	c;//point
+	t_cxnb	k;//constant for Julia set
+	int max_iter;
+	t_set_name f_name;
+}t_fractal;
 
 //fractals
+int		init_fractal(t_fractal *fractal, char *name);
+
 void	mandelbrot(t_cxnb z, t_cxnb c);
+void    draw_mandelbrot(int x, int y, t_cxnb c, t_fractal frctl);
 
-//fct cmxnb
-t_cxnb	init_nbm(double re, double im);
+int julia_motion(int x, int y, t_fractal *frctl);
+t_fractal draw_fractal(t_fractal *frctl);
 
-//fct mlx
-void	ft_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+void draw_pixel(t_image *image, int x, int  y, int color);
 
 //hooks
 int	motion_hook(int x, int y, );
@@ -79,6 +92,7 @@ int	key_hook(int keycode, );
 int	mouse_scaling_hook(int button, int x, int y, );
 
 //utils
-
+int	ft_strcmp(const char *s1, const char *s2);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

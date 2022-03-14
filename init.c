@@ -12,17 +12,18 @@
 
 #include "fractol.h"
 
-void	init_kolo(t_kolo *kolo)
+void	init_fractal(t_fractal *frctl)
 {
-	kolo->re_min = -2.0;
-	kolo->re_max = 2.0;
-	kolo->im_min = -2.0;
-	kolo->im_max = kolo->im_min + (kolo->re_max - kolo->re_min) * HEIGHT / WIDTH;
-    kolo->factor_re = (kolo->re_max - kolo->re_min) / (WIDTH - 1);
-    kolo->factor_im = (kolo->im_max - kolo->im_min) / (HEIGHT - 1);
+	frctl->min.re = -2.0;
+	frctl->min.im = -2.0;
+	frctl->max.re = 2.0;
+	frctl->max.im = frctl->min.im + (frctl->max.re - frctl->min.re) * HEIGHT / WIDTH;
+    frctl->factor.re = (frctl->max.re - frctl->min.re) / (WIDTH - 1);
+	frctl->factor.im = (frctl->max.im - frctl->min.im) / (HEIGHT - 1);
+	//frctl->k = init_cmplx(-0.4, 0.6);
 }
 
-void	init_img(t_mlx *img)
+void	init_img(t_image *img)
 {
 	int bpp;
 	int line_len;

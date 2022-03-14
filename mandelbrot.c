@@ -12,21 +12,43 @@
 
 #include "fractol.h"
 
-void	mandelbrot(t_cxnb z, t_cxnb c)
+void	mandelbrot(t_cxnb c,t_cxnb z, t_fractal *frctl)
 {
-    double cn;
-    double t;
     int iter;
+    double tmp;
+    t_bool isInside = True;
 
     iter = 0;
-    cn = pow(z.re, 2.0) + pow(z.im, 2.0);
-    t = 0;
-    while (cn <= 4 && iter < MAX_ITER)
+    while (pow(z.re, 2.0) + pow(z.im, 2.0) <= 4
+        && ++iter < frctl->max_iter)
     {
-        t = z.re;
-        z.re = pow(z.re, 2.0) - pow(z.im, 2.0 + c.im);
-        z.im = 2.0 * z.im * t + c.im;
-        cn = pow(z.re, 2.0) + pow(z.im, 2.0);
-        iter++;
+        tmp = pow(z.re, 2.0) - pow(z.im, 2.0) + c.re;
+        if (pow(z.re, 2.0) + pow(z.im, 2.0) > 4)
+        {
+            isInside = False;
+            break;  
+        }
+        z.im =  2.0 * z.re * z.im + c.im;
+        z.re = tmp;
     }
+}
+
+void    draw_mandelbrot(int x, int y, t_cxnb z, t_fractal frctl)
+{
+        t_bool isInside;
+
+        y = 0;
+        while (y < HEIGHT)
+        {
+            frctl.c.im = frctl.max.im - y * frctl.factor.im;
+            x = 0;
+            while (x < WIDTH)
+            {
+                frctl.c.re  = frctl.min.re + x * frctl.max.re;
+                mandelbrot(z, frctl);
+            }
+            draw_pixel();
+            x++;
+        }
+        y++;
 }

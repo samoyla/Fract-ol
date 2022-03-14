@@ -9,12 +9,17 @@
 /*   Updated: 2022/03/07 11:40:29 by masamoil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+# include "mlx/mlx.h"
+# include "colors.h"
+# include <stdlib.h>
+# include <string.h>
+# include <errno.h>
+# include <math.h>
 #include "fractol.h"
 
-int	main(void)
+/*int	main(void)
 {
-	t_mlx	data;
+	t_image	data;
 	
 	data.mlx_p = mlx_init();
 	if (!data.mlx_p)
@@ -34,4 +39,21 @@ int	main(void)
 	//mlx_destroy_display(data.mlx_p);
 	//free(data.mlx_p);
 	return (0);
+}*/
+
+int		init_fractal(t_fractal *fractal, char *name)
+{
+	if (!ft_strcmp(name, "Mandelbrot"))
+		fractal->f_name = Mandelbrot;
+	else if (!ft_strcmp(name, "Julia"))
+		fractal->f_name = Julia;
+	else
+		return (0);
+	return (1);
 }
+
+int	main(int ac, char **av)
+{
+
+}
+

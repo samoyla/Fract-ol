@@ -2,12 +2,11 @@
 
 NAME = fractol
 
-SRCS	= main.c fct_ractal.c fct_mlx.c\
- 		utils.c mandelbrot.c
+SRCS	= main.c fct_mlx.c
 
 OBJS = ${SRCS:.c=.o}
 
-CC = clang
+CC = gcc
 
 RM = rm -f
 
@@ -19,10 +18,10 @@ all : ${NAME}
 
 $(NAME) : $(OBJS)
 	make -s -C ./mlx
-	${CC} ${CFLAGS} -I mlx/libmlx_Linux.a ${SRCS} -o ${NAME} $(FL_MLX)
+	${CC} ${CFLAGS} -I/usr/include -I mlx ${SRCS} -o ${NAME} $(FL_MLX)
 
 %.o:%.c
-	${CC} ${FLAGS} -Imlx -Ibass -I mlx/libmlx_Linux.a -o $@ -c $<
+	${CC} ${FLAGS} -I/usr/include -Imlx -Ibass -I mlx -o $@ -c $<
 
 clean :
 	${RM} ${OBJS} ${OBJS_BONUS}
