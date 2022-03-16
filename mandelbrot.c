@@ -35,7 +35,7 @@ void	mandelbrot(t_cxnb c,t_cxnb z, t_fractal *frctl)
 
 void    draw_mandelbrot(int x, int y, t_cxnb z, t_fractal frctl)
 {
-        t_bool isInside;
+        int color;
 
         y = 0;
         while (y < HEIGHT)
@@ -45,9 +45,9 @@ void    draw_mandelbrot(int x, int y, t_cxnb z, t_fractal frctl)
             while (x < WIDTH)
             {
                 frctl.c.re  = frctl.min.re + x * frctl.max.re;
-                mandelbrot(z, frctl);
+                color = mandelbrot(z, frctl);
             }
-            draw_pixel();
+            img_pix_put(frctl.img.img, x, y, color);
             x++;
         }
         y++;

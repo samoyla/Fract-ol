@@ -16,13 +16,18 @@
 # include "mlx/mlx.h"
 # include "colors.h"
 # include <stdlib.h>
+# include <stdio.h>
 # include <string.h>
 # include <errno.h>
 # include <math.h>
+#include <stdint.h>
+#include <unistd.h>
+#include <X11/keysym.h>
+#include <X11/X.h>
 
 # define TITLE "Fractol"
-# define HEIGHT 1000
-# define WIDTH 1000
+# define HEIGHT 600
+# define WIDTH 300
 //height and width are the size of a window, 
 //in order to avoid the distortion
 # define MAX_ITER 50
@@ -49,23 +54,29 @@ typedef struct s_cxnb
 }t_cxnb;
 
 //mlx data about image
-typedef struct s_image
+typedef struct s_img
 {
-	void	*mlx_p;
-	void	*mlx_win;
 	void	*img;
 	char	*addr;
 	int		bpp; 
 	//bits_per_pixel
 	//is total number of bits stored for each pixel in a graphic image
-	int		line_len;
+	int		line_length;
 	int		endian; 
-	//the way_order the butes are read in computer memory
-}t_image;
+	//the way_order the bytes are read in computer memory
+}t_img;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+    t_img img;
+    int cur_img;
+}t_data;
 
 typedef struct s_fractal
 {
-	t_image image;
+	t_img img;
 	t_cxnb	min;
 	t_cxnb	max;
 	t_cxnb	factor;
@@ -84,12 +95,18 @@ void    draw_mandelbrot(int x, int y, t_cxnb c, t_fractal frctl);
 int julia_motion(int x, int y, t_fractal *frctl);
 t_fractal draw_fractal(t_fractal *frctl);
 
-void draw_pixel(t_image *image, int x, int  y, int color);
 
-//hooks
-int	motion_hook(int x, int y, );
+//void	my_mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
+
+void	img_pix_put(t_img *img, int x, int y, int color);
+
+//events - hooks
+/*int	motion_hook(int x, int y, );
 int	key_hook(int keycode, );
 int	mouse_scaling_hook(int button, int x, int y, );
+int	handle_no_event(void *data);
+int	handle_keypress(int keysym, t_data *data);
+int	handle_keyrelease(int keysym, void *data);*/
 
 //utils
 int	ft_strcmp(const char *s1, const char *s2);
