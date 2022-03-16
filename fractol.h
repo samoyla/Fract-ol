@@ -91,8 +91,8 @@ int		init_fractal(t_fractal *fractal, char *name);
 
 void	mandelbrot(t_cxnb z, t_cxnb c);
 void    draw_mandelbrot(int x, int y, t_cxnb c, t_fractal frctl);
-
-int julia_motion(int x, int y, t_fractal *frctl);
+void	julia();
+void	draw_julia();
 t_fractal draw_fractal(t_fractal *frctl);
 
 
@@ -107,6 +107,17 @@ int	mouse_scaling_hook(int button, int x, int y, );
 int	handle_no_event(void *data);
 int	handle_keypress(int keysym, t_data *data);
 int	handle_keyrelease(int keysym, void *data);*/
+void	init_events(t_data *data, t_img *img)
+{
+	//mlx_loop_hook(data->mlx_ptr, &loop_handler, image);
+	mlx_hook(data->win_ptr, DestroyNotify, StructureNotifyMask,
+		&red_cross_handler, image);
+	//mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keyrelease, &data);
+	//mlx_hook(data->win_ptr, ButtonPress, ButtonPressMask,
+		&button_handler, image);
+	//mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask,
+		&pointer_handler, image);
+}
 
 //utils
 int	ft_strcmp(const char *s1, const char *s2);

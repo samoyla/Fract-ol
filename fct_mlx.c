@@ -12,14 +12,6 @@
 
 #include "fractol.h"
 
-/*void ft_mlx_pixel_put(t_image *data, int x, int y, int color)
-{
-	char *dst;
-
-	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
-}*/
-
 void draw_pixel(t_image *img, int x, int  y, int color)
 {
 	char *pixel;

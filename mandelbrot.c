@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-void	mandelbrot(t_cxnb c,t_cxnb z, t_fractal *frctl)
+void	mandelbrot(t_cxnb c,t_cxnb z, t_fractal frctl)
 {
     int iter;
     double tmp;
@@ -20,7 +20,7 @@ void	mandelbrot(t_cxnb c,t_cxnb z, t_fractal *frctl)
 
     iter = 0;
     while (pow(z.re, 2.0) + pow(z.im, 2.0) <= 4
-        && ++iter < frctl->max_iter)
+        && ++iter < frctl.max_iter)
     {
         tmp = pow(z.re, 2.0) - pow(z.im, 2.0) + c.re;
         if (pow(z.re, 2.0) + pow(z.im, 2.0) > 4)
