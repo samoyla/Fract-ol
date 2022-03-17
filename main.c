@@ -33,12 +33,8 @@
 	data.img = mlx_new_image(data.mlx_p, WIDTH, HEIGHT);
 	data.addr = mlx_get_data_addr(data.img, &data.bpp, &data.line_len, &data.endian);
 	ft_mlx_pixel_put(data.img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(data.mlx_p, data.mlx_win, data.img, 0, 0);
-	mlx_loop(data.mlx_p);
-	//mlx_destroy_window(data.mlx_p, data.mlx_win);
-	//mlx_destroy_display(data.mlx_p);
-	//free(data.mlx_p);
-	return (0);
+	
+	
 }*/
 
 int		init_fractal(t_fractal *fractal, char *name)
@@ -54,6 +50,22 @@ int		init_fractal(t_fractal *fractal, char *name)
 
 int	main(int ac, char **av)
 {
+	t_data *data;
+	t_img *img;
+	t_fractalfractal;
 
+	fractal = check_args();
+	data = init_data();
+	image = init_image();
+	fractal = init_fractal();
+	init_events();
+	mlx_loop(data->mlx_ptr);
+	mlx_put_image_to_window(data.mlx_p, data.mlx_win, data.img, 0, 0);
+	
+	//
+	mlx_destroy_window(data.mlx_p, data.mlx_win);
+	//mlx_destroy_display(data.mlx_p);
+	//free(data.mlx_p);
+	return (0);
 }
 

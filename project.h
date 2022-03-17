@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdint.h>
 #include "mlx/mlx.h"
+#include "colors.h"
 #include <unistd.h>
 
 # define WIDTH 600

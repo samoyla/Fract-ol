@@ -32,12 +32,23 @@
 //in order to avoid the distortion
 # define MAX_ITER 50
 
-//fractals created
+//fractals 
 typedef enum	e_set_name
 {
 	Mandelbrot,
 	Julia
 }t_set_name;
+
+typedef struct s_fractal
+{
+	t_img img;
+	t_cxnb	min;
+	t_cxnb	max;
+	t_cxnb	factor;
+	t_cxnb	nb;
+	int max_iter;
+	t_set_name f_name;
+}t_fractal;
 
 typedef enum e_bool
 {
@@ -74,27 +85,22 @@ typedef struct s_data
     int cur_img;
 }t_data;
 
-typedef struct s_fractal
+typedef struct s_rect
 {
-	t_img img;
-	t_cxnb	min;
-	t_cxnb	max;
-	t_cxnb	factor;
-	t_cxnb	c;//point
-	t_cxnb	k;//constant for Julia set
-	int max_iter;
-	t_set_name f_name;
-}t_fractal;
+	int	x;
+	int	y;
+	int width;
+	int height;
+	int color;
+}	t_rect;
 
 //fractals
-int		init_fractal(t_fractal *fractal, char *name);
+//int		init_fractal(t_fractal *fractal, char *name);
 
 void	mandelbrot(t_cxnb z, t_cxnb c);
 void    draw_mandelbrot(int x, int y, t_cxnb c, t_fractal frctl);
 void	julia();
 void	draw_julia();
-t_fractal draw_fractal(t_fractal *frctl);
-
 
 //void	my_mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 
@@ -118,6 +124,8 @@ void	init_events(t_data *data, t_img *img)
 	//mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask,
 		&pointer_handler, image);
 }
+
+int mouse_hook();
 
 //utils
 int	ft_strcmp(const char *s1, const char *s2);

@@ -77,7 +77,7 @@ int	render(t_data *data)
 {
 	if (data->win_ptr == NULL)
 		return (1);
-	render_background(&data->img, WHITE_PIXEL);
+	render_background(&data->img, CORAL);
 	render_rect(&data->img, (t_rect){WIDTH - 100, HEIGHT - 100, 100, 100, SILVER});
 	render_rect(&data->img, (t_rect){0, 0, 100, 100, NAVY});
     //render_rect(&data->img, (t_rect){0, 0, 100, 100, });
