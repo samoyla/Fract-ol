@@ -12,28 +12,28 @@
 
 #include "fractol.h"
 
-void    julia(t_cxnb z, t_cxnb c, t_fractal *frctl)
+void    init_julia(t_fractal *frctl)
+{
+    frctl->k.re = 0.6;
+    frctl->k.im = -0.4;
+}
+
+void    julia(t_cxnb z, t_cxnb c, t_fractal frctl)
 {
     int iter;
     double tmp;
-    t_bool isInside = True;
-
+   
     iter = 0;
     while (pow(z.re, 2.0) + pow(z.im, 2.0) <= 4
         && ++iter < frctl->max_iter)
     {
         tmp = pow(z.re, 2.0) - pow(z.im, 2.0) + frctl->k.re;
-        if (pow(z.re, 2.0) + pow(z.im, 2.0) > 4)
-        {
-            isInside = False;
-            break;  
-        }
-        c.im = 2.0 * z.re * z.im + frctl->k.im;
-        c.re = tmp;
+        k.im = 2.0 * z.re * z.im + frctl->k.im;
+        k.re = tmp;
     }
 }
 
-void draw_julia()
+void draw_julia(int x, int y, t_fractal *fractal)
 {
     
 }

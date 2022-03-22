@@ -47,3 +47,11 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
 {
 	return (red << 16 | green << 8 | blue);
 }
+
+/*t = (double)iteration / (double)max_iteration;
+
+red = (int)(9 * (1 - t) * pow(t, 3) * 255);
+green = (int)(15 * pow((1 - t), 2) * pow(t, 2) * 255);
+blue = (int)(8.5 * pow((1 - t), 3) * t * 255);*/
+//choice of color depending on a number of iterations done
+

@@ -12,17 +12,6 @@
 
 #include "fractol.h"
 
-void	init_fractal(t_fractal *frctl)
-{
-	frctl->min.re = -2.0;
-	frctl->min.im = -2.0;
-	frctl->max.re = 2.0;
-	frctl->max.im = 2.0;
-    frctl->factor.re = (frctl->max.re - frctl->min.re) / (WIDTH - 1);
-	frctl->factor.im = (frctl->max.im - frctl->min.im) / (HEIGHT - 1);
-	//frctl->k = init_cmplx(-0.4, 0.6);
-}
-
 void	init_events(t_data *data, t_img *img)
 {
 	//mlx_loop_hook(data->mlx_ptr, &loop_handler, image);
