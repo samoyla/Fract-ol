@@ -26,8 +26,8 @@
 #include <X11/X.h>
 
 # define TITLE "Fractol"
-# define HEIGHT 600
-# define WIDTH 300
+# define HEIGHT 300
+# define WIDTH 600
 # define MLX_ERROR 1
 # define MAX_ITER 50
 
@@ -81,7 +81,7 @@ typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-    t_img img;
+    t_img	img;
 }t_data;
 
 typedef struct s_rect

@@ -1,6 +1,6 @@
 NAME = project
 
-SRCS	= main2.c fct.c fct_render.c utils.c
+SRCS	= main.c fct.c fct_render.c utils.c mandelbrot.c
 
 OBJS = ${SRCS:.c=.o}
 

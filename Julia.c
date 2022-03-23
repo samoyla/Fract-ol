@@ -14,9 +14,22 @@
 
 void    init_julia(t_fractal *frctl)
 {
+    fractal->min.re = -2.0;
+	fractal->min.im = -2.0;
+	fractal->max.re = 2.0;
+	fractal->max.im = 2.0;
+    fractal->max_iter = 50;
     frctl->k.re = 0.6;
     frctl->k.im = -0.4;
 }
+
+/*int julia_motion(int x, int y, t_fractal *fractal)
+{
+    fractal->k.re = 4 * ((double)x / WIDTH - 0.5);
+    fractal->k.im = 4 * ((double)(HEIGHT - y) / HEIGHT - 0.5);
+    draw_julia();
+    return (0);
+}*/
 
 void    julia(t_cxnb z, t_cxnb c, t_fractal frctl)
 {

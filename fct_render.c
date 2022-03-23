@@ -77,11 +77,32 @@ int	render(t_data *data)
 {
 	if (data->win_ptr == NULL)
 		return (1);
+	render_rect(&data->img, (t_rect){50, 50, 100, 100, OLIVE});
+	/*img_pix_put(&data->img, 200, 200, GREEN);
+	img_pix_put(&data->img, 201, 200, GREEN);
+	img_pix_put(&data->img, 202, 200, GREEN);
+	img_pix_put(&data->img, 203, 200, GREEN);
+	img_pix_put(&data->img, 204, 200, GREEN);
+	img_pix_put(&data->img, 205, 200, GREEN);
+	img_pix_put(&data->img, 206, 200, GREEN);
+	img_pix_put(&data->img, 207, 200, GREEN);
+	img_pix_put(&data->img, 208, 200, GREEN);
+	img_pix_put(&data->img, 209, 200, GREEN);
+	img_pix_put(&data->img, 210, 200, GREEN);*/
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
+
+	return (0);
+}
+
+int	render2(t_data *data)
+{
+	if (data->win_ptr == NULL)
+		return (1);
 	render_background(&data->img, CORAL);
 	render_rect(&data->img, (t_rect){WIDTH - 100, HEIGHT - 100, 100, 100, SILVER});
 	render_rect(&data->img, (t_rect){0, 0, 100, 100, NAVY});
-    //render_rect(&data->img, (t_rect){0, 0, 100, 100, });
-
+    render_rect(&data->img, (t_rect){100, 100, WIDTH - 200, HEIGHT -200, OLIVE});
+	img_pix_put(&data->img, 200, 200, GREEN);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 
 	return (0);

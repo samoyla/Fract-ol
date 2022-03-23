@@ -6,6 +6,7 @@
 #include "mlx/mlx.h"
 #include "colors.h"
 #include <unistd.h>
+#include <math.h>
 
 # define WIDTH 600
 # define HEIGHT 300
@@ -43,14 +44,13 @@ typedef struct	s_img {
 	int		bpp;
 	int		line_length;
 	int		endian;
-}				t_img;
+}	t_img;
 
 typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-    t_img img;
-    int cur_img;
+    t_img	img;
 }	t_data;
 
 typedef struct s_rect
@@ -62,6 +62,25 @@ typedef struct s_rect
 	int color;
 }	t_rect;
 
+//complex number
+typedef struct s_cxnb
+{
+	double	re;
+	double	im;
+	
+}t_cxnb;
+
+typedef struct s_fractal
+{
+	t_img img;
+	t_cxnb	min;
+	t_cxnb	max;
+	t_cxnb	factor;
+	t_cxnb	c;
+	t_cxnb	k;//constant for julia
+	int max_iter;
+}t_fractal;
+
 //hooks
 int	handle_no_event(void *data);
 int	handle_keypress(int keysym, t_data *data);
@@ -69,10 +88,16 @@ int	handle_keyrelease(int keysym, void *data);
 //void	my_mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 
 void	img_pix_put(t_img *img, int x, int y, int color);
-int render_rect(t_img *img, t_rect rect);
+int		render_rect(t_img *img, t_rect rect);
 void	render_background(t_img *img, int color);
-int	render(t_data *data);
+int		render(t_data *data);
+int		render2(t_data *data);
+
+void	init_mandelbrot(t_fractal *frctl);
+int	mandelbrot(t_cxnb z, t_cxnb c, t_fractal fractal);
+void    *draw_mandelbrot(int x, int y, t_cxnb c, t_cxnb z, t_fractal *fractal);
 
 int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 
 void	ft_putstr_fd(char *s, int fd);
+int	ft_strcmp(const char *s1, const char *s2);
