@@ -17,23 +17,24 @@
 # include <math.h>
 #include "fractol.h"
 
-/*int		init_fractal(t_fractal *fractal, char *name)
+int		init_fractal(t_fractal *fractal, char *name)
 {
 	if (!ft_strcmp(name, "Mandelbrot"))
-		return(&draw_mandelbrot);
+		fractal->f_name = Mandelbrot;
 	else if (!ft_strcmp(name, "Julia"))
-		return(&draw_julia);
+		fractal->f_name = Julia;
 	else
 		return (0);
 	return (1);
-}*/
+}
 
 int	main(int ac, char **av)
 {
-	t_data	data;
+	t_data		data;
+	t_fractal	fractol;
 
 	(void)av;
-	if (ac != 2)
+	if (ac != 2 || !init_fractal(&fractol, av[1]) )
 	{
 		fractol_usage();
 		exit(0);
