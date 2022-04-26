@@ -1,6 +1,6 @@
-NAME = project
+NAME = fractol
 
-SRCS	= main.c fct.c fct_render.c utils.c mandelbrot.c
+SRCS	= main.c events.c fct_render.c utils.c mandelbrot.c
 
 OBJS = ${SRCS:.c=.o}
 

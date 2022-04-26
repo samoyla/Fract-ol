@@ -15,27 +15,7 @@
 # include <string.h>
 # include <errno.h>
 # include <math.h>
-#include "project.h"
-
-/*int	main(void)
-{
-	t_image	data;
-	
-	data.mlx_p = mlx_init();
-	if (!data.mlx_p)
-		exit (1);
-	data.mlx_win = mlx_new_window(data.mlx_p, WIDTH, HEIGHT, "Fractol");
-	if (!data.mlx_win)
-	{
-		free(data.mlx_win);
-		exit (1);
-	}
-	data.img = mlx_new_image(data.mlx_p, WIDTH, HEIGHT);
-	data.addr = mlx_get_data_addr(data.img, &data.bpp, &data.line_len, &data.endian);
-	ft_mlx_pixel_put(data.img, 5, 5, 0x00FF0000);
-	
-	
-}*/
+#include "fractol.h"
 
 /*int		init_fractal(t_fractal *fractal, char *name)
 {
@@ -51,8 +31,13 @@
 int	main(int ac, char **av)
 {
 	t_data	data;
-	(void)av;
 
+	(void)av;
+	if (ac != 2)
+	{
+		fractol_usage();
+		exit(0);
+	}
 	if (ac == 2)
 	{
 
@@ -62,30 +47,29 @@ int	main(int ac, char **av)
 		data.win_ptr = mlx_new_window(data.mlx_ptr, WIDTH, HEIGHT, "MY PIXEL");
 		if (data.win_ptr == NULL)
 		{
+			free(data.mlx_ptr);
 			free(data.win_ptr);
 			return (MLX_ERROR);
 		}
 
 	data.img.img = mlx_new_image(data.mlx_ptr, WIDTH, HEIGHT);
 	data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bpp, &data.img.line_length, &data.img.endian);
-
 	mlx_put_image_to_window(data.mlx_ptr,data.win_ptr, data.img.img, 0, 0);
 
-	/* Setup hooks */ 
 	if (ft_strcmp (av[1], "Mandelbrot"))
-		mlx_loop_hook(data.mlx_ptr, &draw_mandelbrot, &data);
+	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	else if (ft_strcmp(av[1], "Julia"))
 	 	mlx_loop_hook(data.mlx_ptr, &render2, &data);//will be replace by init_fractal
-	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data); /* ADDED */
+	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
+	//mlx_hook(data.win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, &data);
 
 	mlx_loop(data.mlx_ptr);
 
 	/* we will exit the loop if there's no window left, and execute this code */
+	//mlx_destroy_window(data.mlx_ptr, data.win_ptr);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
 	}
-	printf("Choose your fractal:\n");
-	printf("- Mandelbrot\n - Julia\n");
 	/*t_data *data;
 	t_img *image;
 	t_fractal fractal;
@@ -97,11 +81,9 @@ int	main(int ac, char **av)
 	init_events();
 	mlx_loop(data->mlx_ptr);
 	mlx_put_image_to_window(data.mlx_p, data.mlx_win, data.img, 0, 0);
-	
-	//
 	mlx_destroy_window(data.mlx_p, data.mlx_win);
-	//mlx_destroy_display(data.mlx_p);
-	//free(data.mlx_p);*/
+	mlx_destroy_display(data.mlx_p);
+	free(data.mlx_p);*/
 	return (0);
 }
 

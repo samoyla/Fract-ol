@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "project.h"
+#include "fractol.h"
 
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
