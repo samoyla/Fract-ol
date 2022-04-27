@@ -16,10 +16,10 @@ all : ${NAME}
 
 $(NAME) : $(OBJS)
 	make -s -C ./mlx
-	${CC} ${CFLAGS} -I mlx ${SRCS} -o ${NAME} $(FL_MLX)
+	${CC} ${CFLAGS} -Imlx ${SRCS} -o ${NAME} $(FL_MLX)
 
 %.o:%.c
-	${CC} ${FLAGS} -Imlx -Ibass -I mlx -o $@ -c $<
+	${CC} ${FLAGS} -Imlx -Ibass -o $@ -c $<
 
 clean :
 	${RM} ${OBJS} ${OBJS_BONUS}

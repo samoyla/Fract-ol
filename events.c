@@ -37,6 +37,20 @@ int	handle_keyrelease(int keysym, void *data)
 	return (0);
 }
 
+int    ft_red_cross(t_data *data)
+{
+    //ft_destroy_images(data);
+    if (data->win_ptr)
+    {
+        mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+        mlx_destroy_display(data->mlx_ptr);
+        data->win_ptr = NULL;
+    }
+    free(data->mlx_ptr);
+    //ft_free(data->map.map);
+    exit(0);
+}
+
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;

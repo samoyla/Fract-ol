@@ -24,11 +24,12 @@
 #include <unistd.h>
 #include <X11/keysym.h>
 #include <X11/X.h>
+# include <X11/Xlib.h>
 
 # define TITLE "Fractol"
 # define WIDTH 600
 # define HEIGHT 300
-# define MLX_ERROR 1
+# define MLX_ERROR -1
 
 //fractals 
 typedef enum	e_set_name
@@ -56,21 +57,18 @@ typedef struct s_cxnb
 
 typedef struct s_fractal
 {
-	t_img	img;
+	//t_img	img;
 	t_cxnb	min;
 	t_cxnb	max;
 	t_cxnb	factor;
 	t_cxnb	c;
+	t_cxnb	z;
 	t_cxnb	k;//constant for julia
 	int max_iter;
 	t_set_name f_name;
+	int	x;
+	int	y;
 }t_fractal;
-
-typedef enum e_bool
-{
-	False,
-	True
-}t_bool;
 
 typedef struct s_data
 {
@@ -92,8 +90,9 @@ typedef struct s_rect
 //fractals
 int		init_fractal(t_fractal *fractal, char *name);
 void	init_mandelbrot(t_fractal *frctl);
-int		mandelbrot(t_cxnb z, t_cxnb c, t_fractal fractal);
-void    *draw_mandelbrot(int x, int y, t_cxnb c, t_cxnb z, t_fractal *fractal);
+int		mandelbrot(t_fractal fractal);
+int    *draw_mandelbrot(t_fractal *fractal, t_data *data);
+int		render_man(t_data *data, t_fractal *fractal);
 void	init_julia();
 void	julia();
 void	draw_julia();
@@ -109,6 +108,7 @@ int		render2(t_data *data);
 //events - hooks
 int		handle_keypress(int keysym, t_data *data);
 int		handle_keyrelease(int keysym, void *data);
+int		ft_red_cross(t_data *data);
 
 /*void	init_events(t_data *data, t_img *img)
 {
