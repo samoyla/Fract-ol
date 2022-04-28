@@ -29,14 +29,6 @@
 # define TITLE "Fractol"
 # define WIDTH 600
 # define HEIGHT 300
-# define MLX_ERROR -1
-
-//fractals 
-typedef enum	e_set_name
-{
-	Mandelbrot,
-	Julia
-}t_set_name;
 
 //mlx data about image
 typedef struct s_img
@@ -61,13 +53,10 @@ typedef struct s_fractal
 	t_cxnb	min;
 	t_cxnb	max;
 	t_cxnb	factor;
-	t_cxnb	c;
+	//t_cxnb	c;
 	t_cxnb	z;
 	t_cxnb	k;//constant for julia
 	int max_iter;
-	t_set_name f_name;
-	int	x;
-	int	y;
 }t_fractal;
 
 typedef struct s_data
@@ -89,11 +78,14 @@ typedef struct s_rect
 
 //fractals
 int		init_fractal(t_fractal *fractal, char *name);
-void	init_mandelbrot(t_fractal *frctl);
-int		mandelbrot(t_fractal fractal);
+t_data	*init_data(t_data *data, char *name);
+t_data *init_image(t_data *data);
+
+void	init_mandelbrot(t_fractal *fractal);
+int		mandelbrot(t_fractal *fractal, t_cxnb c);
 int    *draw_mandelbrot(t_fractal *fractal, t_data *data);
 int		render_man(t_data *data, t_fractal *fractal);
-void	init_julia();
+void	init_julia(t_fractal *fractal);
 void	julia();
 void	draw_julia();
 
@@ -107,22 +99,8 @@ int		render(t_data *data);
 int		render2(t_data *data);
 //events - hooks
 int		handle_keypress(int keysym, t_data *data);
-int		handle_keyrelease(int keysym, void *data);
 int		ft_red_cross(t_data *data);
-
-/*void	init_events(t_data *data, t_img *img)
-{
-	//mlx_loop_hook(data->mlx_ptr, &loop_handler, image);
-	mlx_hook(data->win_ptr, DestroyNotify, StructureNotifyMask,
-		&red_cross_handler, image);
-	//mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keyrelease, &data);
-	//mlx_hook(data->win_ptr, ButtonPress, ButtonPressMask,
-		&button_handler, image);
-	//mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask,
-		&pointer_handler, image);
-}
-
-int mouse_hook();*/
+void	init_events(t_data *data);
 
 //utils
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);

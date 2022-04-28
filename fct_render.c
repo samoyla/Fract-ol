@@ -17,7 +17,7 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	char    *pixel;
 	int		i;
 
-	if (x > WIDTH || x < 0 || y > HEIGHT || y < 0)
+	if (x >= WIDTH || x < 0 || y >= HEIGHT || y < 0)
 	{
 		ft_putstr_fd("can't reach this pixel\n", 2);
 		return ;
@@ -28,10 +28,10 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	{
 		/* big endian, MSB is the leftmost bit */
 		if (img->endian != 0)
-			*pixel++ = (color >> i) & 0xFF;
+			*pixel++ = (color >> i) & 255;
 		/* little endian, LSB is the leftmost bit */
 		else
-			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
+			*pixel++ = (color >> (img->bpp - 8 - i)) & 255;
 		i -= 8;
 	}
 }
@@ -96,7 +96,6 @@ int	render2(t_data *data)
 	render_rect(&data->img, (t_rect){WIDTH - 100, HEIGHT - 100, 100, 100, SILVER});
 	render_rect(&data->img, (t_rect){0, 0, 100, 100, NAVY});
     render_rect(&data->img, (t_rect){100, 100, WIDTH - 200, HEIGHT -200, OLIVE});
-	img_pix_put(&data->img, 200, 200, GREEN);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	return (0);
 }

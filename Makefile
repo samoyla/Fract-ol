@@ -1,6 +1,7 @@
 NAME = fractol
 
-SRCS	= main.c events.c fct_render.c utils.c mandelbrot.c
+SRCS	= main.c events.c fct_render.c utils.c\
+			mandelbrot.c init.c julia.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -10,7 +11,7 @@ RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-FL_MLX = -ldl -lmlx -Lmlx -lm -lXext -lX11
+FL_MLX = -ldl -lmlx -Lmlx -lm -lXext -lX11 -lz
 
 all : ${NAME}
 

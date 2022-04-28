@@ -19,27 +19,30 @@ void	init_mandelbrot(t_fractal *fractal)
 	fractal->min.im = -2.0;
 	fractal->max.re = 2.0;
 	fractal->max.im = 2.0;
-	fractal->max_iter = 50;
-	fractal->factor.re = (fractal->max.re - fractal->min.re) / (WIDTH - 1);
-	fractal->factor.im = (fractal->max.im - fractal->min.im) / (HEIGHT - 1);
+	fractal->max_iter = 10;
+	// fractal->factor.re = (fractal->max.re - fractal->min.re) / (WIDTH - 1);
+	// fractal->factor.im = (fractal->max.im - fractal->min.im) / (HEIGHT - 1);
 }
 
-int	mandelbrot(t_fractal fractal)
+int	mandelbrot(t_fractal *fractal, t_cxnb c)
 {
 	int		iter;
 	double	tmp;
 
 	iter = 0;
-	fractal.z.re = 0;
-	fractal.z.im = 0;
-	while (pow(fractal.z.re, 2.0) + pow(fractal.z.im, 2.0) <= 4
-		&& ++iter < fractal.max_iter)
+	fractal->z.re = 0;
+	fractal->z.im = 0;
+	printf("fractal c im = %f\n", c.im);
+	printf("fractal c re = %f\n", c.re);
+	while (pow(fractal->z.re, 2) + pow(fractal->z.im, 2) < 4
+		&& iter < fractal->max_iter)
 	{
-		tmp = pow(fractal.z.re, 2.0) - pow(fractal.z.im, 2.0) + fractal.c.re;
-		fractal.z.im =  2.0 * fractal.z.re * fractal.z.im + fractal.c.im;
-		fractal.z.re = tmp;
+		tmp = pow(fractal->z.re, 2) - pow(fractal->z.im, 2) + c.re;
+		fractal->z.im =  2.0 * fractal->z.re * fractal->z.im + c.im;
+		fractal->z.re = tmp;
+		++iter;
 	}
-	if (iter == fractal.max_iter)
+	if (iter >= fractal->max_iter)
 		return (-1);
 	else
 	{
@@ -49,42 +52,55 @@ int	mandelbrot(t_fractal fractal)
 
 int	*draw_mandelbrot(t_fractal *fractal, t_data *data)
 {
+	t_cxnb c;
 	int	color;
+	int	x;
+	int	y;
+
 	color = 0;
-	fractal->y = 0;
-	while (fractal->y++ < HEIGHT)
+	y = 0;
+	while (y < HEIGHT)
 	{
-		fractal->c.im = fractal->max.im - fractal->y * fractal->factor.im;
-		fractal->x = 0;
-		while (fractal->x++ < WIDTH)
+		// fractal->c.im = fractal->max.im - y * fractal->factor.im;
+		c.im = (-1 * y) * ((fractal->max.im - fractal->min.im) / HEIGHT) + fractal->max.im;
+		x = 0;
+		while (x < WIDTH)
 		{
-			fractal->c.re  = fractal->min.re + fractal->x * fractal->max.re;
-			color = mandelbrot(*fractal);
-			printf("int color is :%d\n", color);
+			printf("fractal c im = %f\n", c.im);
+			// fractal->c.re  = fractal->min.re + x * fractal->factor.re;
+			c.re = x * ((fractal->max.re - fractal->min.re) / (WIDTH)) + fractal->min.re;
+			printf("fractal c re = %f\n", c.re);
+			color = mandelbrot(fractal, c);
+			printf("int color is :%d %d %d\n", color, x, y);
 			if (color == -1)
 			{
-				printf("hello black\n");
-				img_pix_put(&data->img, fractal->x, fractal->y, ORANGE);
+				//printf("mandelbrot\n");
+				img_pix_put(&data->img, x, y, 0x000000);
 			}
 			else
 			{
-				printf("hello white\n");
-				img_pix_put(&data->img, fractal->x, fractal->y, WHITE);
+				//printf("not mandelbrot\n");
+				img_pix_put(&data->img, x, y, 0xffffff);
 			}
 			//img_pix_put(&data->img, fractal->x, fractal->y, ORANGE);
+			x++;
 		}
+		y++;
 	}
 	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	return (0);
 }
- 
+
 int	render_man(t_data *data, t_fractal *fractal)
 {
-	if (data->win_ptr == NULL)
+	static int	render = 1;
+
+	if (data->win_ptr == NULL || render == 0)
 	 	return (1);
-	//(void)fractal;
 	draw_mandelbrot(fractal, data);
 	//render_rect(&data->img, (t_rect){100, 100, 200, 200, ORANGE});
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
+	sleep(3);
+	render = 0;
 	return(0);
 }

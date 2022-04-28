@@ -12,15 +12,15 @@
 
 #include "fractol.h"
 
-void    init_julia(t_fractal *frctl)
+void    init_julia(t_fractal *fractal)
 {
     fractal->min.re = -2.0;
 	fractal->min.im = -2.0;
 	fractal->max.re = 2.0;
 	fractal->max.im = 2.0;
     fractal->max_iter = 50;
-    frctl->k.re = 0.6;
-    frctl->k.im = -0.4;
+    fractal->k.re = 0.6;
+    fractal->k.im = -0.4;
 }
 
 /*int julia_motion(int x, int y, t_fractal *fractal)
@@ -31,7 +31,7 @@ void    init_julia(t_fractal *frctl)
     return (0);
 }*/
 
-void    julia(t_cxnb z, t_cxnb c, t_fractal frctl)
+/*void    julia(t_cxnb z, t_cxnb c, t_fractal frctl)
 {
     int iter;
     double tmp;
@@ -49,4 +49,4 @@ void    julia(t_cxnb z, t_cxnb c, t_fractal frctl)
 void draw_julia(int x, int y, t_fractal *fractal)
 {
     
-}
+}*/
