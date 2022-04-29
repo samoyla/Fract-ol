@@ -28,7 +28,7 @@
 
 # define TITLE "Fractol"
 # define WIDTH 600
-# define HEIGHT 300
+# define HEIGHT 500
 
 //mlx data about image
 typedef struct s_img
@@ -53,17 +53,20 @@ typedef struct s_fractal
 	t_cxnb	min;
 	t_cxnb	max;
 	t_cxnb	factor;
+	//double	xc;
+	//double	yc;
 	//t_cxnb	c;
-	t_cxnb	z;
+	//t_cxnb	z;
 	t_cxnb	k;//constant for julia
 	int max_iter;
 }t_fractal;
 
 typedef struct s_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-    t_img	img;
+	void		*mlx_ptr;
+	void		*win_ptr;
+    t_img		img;
+	t_fractal	*fractal;
 }t_data;
 
 typedef struct s_rect
@@ -84,7 +87,7 @@ t_data *init_image(t_data *data);
 void	init_mandelbrot(t_fractal *fractal);
 int		mandelbrot(t_fractal *fractal, t_cxnb c);
 int    *draw_mandelbrot(t_fractal *fractal, t_data *data);
-int		render_man(t_data *data, t_fractal *fractal);
+int		render_man(t_data *data);
 void	init_julia(t_fractal *fractal);
 void	julia();
 void	draw_julia();

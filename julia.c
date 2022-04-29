@@ -17,7 +17,9 @@ void    init_julia(t_fractal *fractal)
     fractal->min.re = -2.0;
 	fractal->min.im = -2.0;
 	fractal->max.re = 2.0;
-	fractal->max.im = 2.0;
+	//fractal->max.im = 2.0;
+    fractal->max.im = fractal->max.im +(fractal->max.re - fractal->min.re)
+						* HEIGHT / WIDTH;
     fractal->max_iter = 50;
     fractal->k.re = 0.6;
     fractal->k.im = -0.4;
@@ -44,9 +46,9 @@ void    init_julia(t_fractal *fractal)
         k.im = 2.0 * z.re * z.im + frctl->k.im;
         k.re = tmp;
     }
-}
+}*/
 
-void draw_julia(int x, int y, t_fractal *fractal)
+/*void draw_julia(int x, int y, t_fractal *fractal)
 {
     
 }*/

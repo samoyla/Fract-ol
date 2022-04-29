@@ -29,15 +29,13 @@ int	main(int ac, char **av)
 		if (!ft_strcmp(av[1], "Mandelbrot"))
 		{
 			init_mandelbrot(&fractol);
+			data.fractal = &fractol;
 			mlx_loop_hook(data.mlx_ptr, &render_man, &data);
 			//render_man(&data, &fractol);
 		}
 		else if (!ft_strcmp(av[1], "Julia"))
 		{
 			init_julia(&fractol);
-			printf("%f\n", fractol.min.re);
-			printf("%f\n", fractol.min.im);
-			printf("%d\n", fractol.max_iter);
 			mlx_loop_hook(data.mlx_ptr, &render2, &data);
 		}
 		else
