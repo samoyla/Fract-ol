@@ -65,41 +65,66 @@ typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-    t_img		img;
+	t_img		img;
 	t_fractal	*fractal;
+	int	*tab;
 }t_data;
 
 typedef struct s_rect
 {
 	int	x;
 	int	y;
-	int width;
-	int height;
-	int color;
+	int	width;
+	int	height;
+	int	color;
 }t_rect;
 
-
 //fractals
-int		init_fractal(t_fractal *fractal, char *name);
+void	init_fractal(t_fractal *fractal);
 t_data	*init_data(t_data *data, char *name);
-t_data *init_image(t_data *data);
+t_data	*init_image(t_data *data);
 
 void	init_mandelbrot(t_fractal *fractal);
 int		mandelbrot(t_fractal *fractal, t_cxnb c);
-int    *draw_mandelbrot(t_fractal *fractal, t_data *data);
+int		*draw_mandelbrot(t_fractal *fractal, t_data *data);
 int		render_man(t_data *data);
+
 void	init_julia(t_fractal *fractal);
-void	julia();
-void	draw_julia();
+int		julia(t_fractal *fractal);
+int		*draw_julia(t_fractal *fractal, t_data *data);
+int		render_julia(t_data *data);
 
-//void	my_mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
+void	init_mandelbar(t_fractal *fractal);
+int		mandelbar(t_fractal *fractal, t_cxnb c);
+int		*draw_mandelbar(t_fractal *fractal, t_data *data);
+int		render_mandelbar(t_data *data);
 
+void	init_perpend(t_fractal *fractal);
+int		perpend(t_fractal *fractal, t_cxnb c);
+int		*draw_perpend(t_fractal *fractal, t_data *data);
+int		render_perpend(t_data *data);
+
+void	init_ship(t_fractal *fractal);
+int		ship(t_fractal *fractal, t_cxnb c);
+int		*draw_ship(t_fractal *fractal, t_data *data);
+int		render_ship(t_data *data);
+
+int		celtic(t_fractal *fractal, t_cxnb c);
+int		*draw_celtic(t_fractal *fractal, t_data *data);
+int		render_celtic(t_data *data);
+//draw
 void	img_pix_put(t_img *img, int x, int y, int color);
-void	draw_pixel(t_img *img, int x, int  y, int color);
 int		render_rect(t_img *img, t_rect rect);
 void	render_background(t_img *img, int color);
 int		render(t_data *data);
 int		render2(t_data *data);
+
+void	bzero_tab(int *tab);
+void	color_split(t_data *data, int i, int x, int y);
+int		put_colors(t_data *data, int i, int x, int y);
+int		choose_color(t_data *data);
+int		colors(int i, int i_max);
+
 //events - hooks
 int		handle_keypress(int keysym, t_data *data);
 int		ft_red_cross(t_data *data);
@@ -110,6 +135,6 @@ int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void	ft_putstr_fd(char *s, int fd);
 int		ft_strcmp(const char *s1, const char *s2);
 void	fractol_usage(void);
-void	ft_error();
+void	ft_error(void);
 
 #endif

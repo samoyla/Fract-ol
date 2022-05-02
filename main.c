@@ -9,13 +9,23 @@
 /*   Updated: 2022/03/07 11:40:29 by masamoil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-# include "mlx/mlx.h"
-# include "colors.h"
-# include <stdlib.h>
-# include <string.h>
-# include <errno.h>
-# include <math.h>
+
+#include "mlx/mlx.h"
+#include "colors.h"
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <math.h>
 #include "fractol.h"
+
+void	init_fractal(t_fractal *fractal)
+{
+	fractal->min.re = -2.0;
+	fractal->min.im = -2.0;
+	fractal->max.re = 2.0;
+	fractal->max.im = 2.0;
+	fractal->max_iter = 90;
+}
 
 int	main(int ac, char **av)
 {
@@ -26,18 +36,20 @@ int	main(int ac, char **av)
 	{
 		init_data(&data, "MY FRACTOL");
 		init_image(&data);
+		init_fractal(&fractol);
+		data.fractal = &fractol;
 		if (!ft_strcmp(av[1], "Mandelbrot"))
-		{
-			init_mandelbrot(&fractol);
-			data.fractal = &fractol;
 			mlx_loop_hook(data.mlx_ptr, &render_man, &data);
-			//render_man(&data, &fractol);
-		}
 		else if (!ft_strcmp(av[1], "Julia"))
-		{
-			init_julia(&fractol);
-			mlx_loop_hook(data.mlx_ptr, &render2, &data);
-		}
+			mlx_loop_hook(data.mlx_ptr, &render_julia, &data);
+		else if (!ft_strcmp(av[1], "Mandelbar"))
+			mlx_loop_hook(data.mlx_ptr, &render_mandelbar, &data);
+		else if (!ft_strcmp(av[1], "P"))
+			mlx_loop_hook(data.mlx_ptr, &render_perpend, &data);
+		else if (!ft_strcmp(av[1], "Burning Ship"))
+			mlx_loop_hook(data.mlx_ptr, &render_ship, &data);
+		else if (!ft_strcmp(av[1], "Celtic"))
+			mlx_loop_hook(data.mlx_ptr, &render_celtic, &data);
 		else
 		{
 			fractol_usage();
@@ -52,4 +64,3 @@ int	main(int ac, char **av)
 	}
 	return (0);
 }
-

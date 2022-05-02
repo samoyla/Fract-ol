@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: masamoil <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 09:14:34 by masamoil          #+#    #+#             */
-/*   Updated: 2022/05/02 09:14:42 by masamoil         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "fractol.h"
 
-void	init_mandelbrot(t_fractal *fractal)
+void	init_perpend(t_fractal *fractal)
 {
 	fractal->min.re = -2.0;
 	fractal->min.im = -2.0;
@@ -24,7 +12,7 @@ void	init_mandelbrot(t_fractal *fractal)
 	//fractal->factor.im = (fractal->max.im - fractal->min.im) / (HEIGHT - 1);
 }
 
-int	mandelbrot(t_fractal *fractal, t_cxnb c)
+int	perpend(t_fractal *fractal, t_cxnb c)
 {
 	int		iter;
 	double	tmp;
@@ -36,7 +24,7 @@ int	mandelbrot(t_fractal *fractal, t_cxnb c)
 	while ((pow(z.re, 2.0) + pow(z.im, 2.0)) < 4 && iter < fractal->max_iter)
 	{
 		tmp = pow(z.re, 2.0) - pow(z.im, 2.0) + c.re;
-		z.im = 2.0 * z.re * z.im + c.im;
+		z.im = -2.0 * fabs(z.re) * z.im + c.im;
 		z.re = tmp;
 		++iter;
 	}
@@ -46,7 +34,7 @@ int	mandelbrot(t_fractal *fractal, t_cxnb c)
 		return (iter);
 }
 
-int	*draw_mandelbrot(t_fractal *fractal, t_data *data)
+int	*draw_perpend(t_fractal *fractal, t_data *data)
 {
 	t_cxnb	c;
 	t_cxnb	z;
@@ -65,26 +53,24 @@ int	*draw_mandelbrot(t_fractal *fractal, t_data *data)
 		while (++x < WIDTH)
 		{
             c.re = x * ((fractal->max.re - fractal->min.re) / (WIDTH)) + fractal->min.re;
-			color = mandelbrot(fractal, c);
+			color = perpend(fractal, c);
 			if (color == -1)
 				img_pix_put(&data->img, x, y, 0x000000);
-			/*else if (color)
-				img_pix_put();*/
 			else if (color < fractal->max_iter / 2)
-				img_pix_put(&data->img, x, y, BLUE * color / fractal->max_iter * 10);
+				img_pix_put(&data->img, x, y, 0xff * color / fractal->max_iter * 10);
 			else
-				img_pix_put(&data->img, x, y, YELLOW / fractal->max_iter);
+				img_pix_put(&data->img, x, y, 0xff * color / fractal->max_iter);
 		}
 	}
 	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	return (0);
 }
 
-int	render_man(t_data *data)
+int	render_perpend(t_data *data)
 {
 	if (data->win_ptr == NULL)
 		return (1);
-	draw_mandelbrot(data->fractal, data);
+	draw_perpend(data->fractal, data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	return (0);
 }
