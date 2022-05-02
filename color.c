@@ -12,59 +12,50 @@
 
 #include "fractol.h"
 
-void	bzero_tab(int *tab)
+int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
+{
+	return (red << 16 | green << 8 | blue);
+}
+
+int	get_color(int i, int i_max)
+{
+	int		red;
+	int		green;
+	int		blue;
+	double	t;
+
+	t = (double)i / (double)i_max;
+	red = (int)(9 * (1 - t) * pow(t, 3) * 255);
+	green = (int)(15 * pow((1 - t), 2) * pow(t, 2) * 255);
+	blue = (int)(8.5 * pow((1 - t), 3) * t * 255);
+	return (encode_rgb(red, green, blue));
+}
+
+/*int	get_color(int i, t_data *data)
+{
+	return (data->tab[i]);
+}
+
+void	init_tab(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (i < WIDTH * WIDTH)
+	data->tab = malloc(sizeof(int *) * data->fractal->max_iter);
+	if (!data->tab)
+		return (NULL);
+	while (i < data->fractal->max_iter)
 	{
-		tab[i] = 0;
-		i++;
+		if (i < 20)
+			data->tab[i] = FLORAL_WHITE;
+		else if (i > 19 && i < 40)
+			data->tab[i] = ALICE_BLUE;
+		else if (i > 39 && i < 60)
+			data->tab[i] = LAVENDER;
+		else if (i > 59 && i < 80)
+			data->tab[i] = AZURE;
+		else
+			data->tab[i] = MIDNIGHT_BLUE;
 	}
-}
-
-void	color_split(t_data *data, int i, int x, int y)
-{
-	if (i % 16 == 7)
-		data->tab[y * WIDTH + x] = 3767761;
-	else if (i % 16 == 8)
-		data->tab[y * WIDTH + x] = 8828389;
-	else if (i % 16 == 9)
-		data->tab[y * WIDTH + x] = 13888760;
-	else if (i % 16 == 10)
-		data->tab[y * WIDTH + x] = 15854015;
-	else if (i % 16 == 11)
-		data->tab[y * WIDTH + x] = 16304479;
-	else if (i % 16 == 12)
-		data->tab[y * WIDTH + x] = 16755200;
-	else if (i % 16 == 13)
-		data->tab[y * WIDTH + x] = 13402112;
-	else if (i % 16 == 14)
-		data->tab[y * WIDTH + x] = 10049280;
-	else if (i % 16 == 15)
-		data->tab[y * WIDTH + x] = 6960131;
-}
-
-int	put_colors(t_data *data, int i, int x, int y)
-{
-	if (i == data->fractal->max_itermax_iter)
-		data->tab[y * WIDTH + x] = 0;
-	if (i % 16 == 0)
-		data->tab[y * WIDTH + x] = 4333071;
-	else if (i % 16 == 1)
-		data->tab[y * WIDTH + x] = 1640218;
-	else if (i % 16 == 2)
-		data->tab[y * WIDTH + x] = 590127;
-	else if (i % 16 == 3)
-		data->tab[y * WIDTH + x] = 263241;
-	else if (i % 16 == 4)
-		data->tab[y * WIDTH + x] = 1892;
-	else if (i % 16 == 5)
-		data->tab[y * WIDTH + x] = 797834;
-	else if (i % 16 == 6)
-		data->tab[y * WIDTH + x] = 1594033;
-	else
-		color_split(data, i, x, y);
-    return (0);
-}
+	return (0);
+}*/

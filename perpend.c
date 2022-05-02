@@ -1,16 +1,16 @@
-#include "fractol.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   perpend.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masamoil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/02 17:39:25 by masamoil          #+#    #+#             */
+/*   Updated: 2022/05/02 17:39:29 by masamoil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	init_perpend(t_fractal *fractal)
-{
-	fractal->min.re = -2.0;
-	fractal->min.im = -2.0;
-	fractal->max.re = 2.0;
-	//fractal->max.im = 2.0;
-	fractal->max.im = fractal->min.im +(fractal->max.re - fractal->min.re) * HEIGHT / WIDTH;
-	fractal->max_iter = 100;
-	//fractal->factor.re = (fractal->max.re - fractal->min.re) / (WIDTH - 1);
-	//fractal->factor.im = (fractal->max.im - fractal->min.im) / (HEIGHT - 1);
-}
+#include "fractol.h"
 
 int	perpend(t_fractal *fractal, t_cxnb c)
 {
@@ -56,13 +56,10 @@ int	*draw_perpend(t_fractal *fractal, t_data *data)
 			color = perpend(fractal, c);
 			if (color == -1)
 				img_pix_put(&data->img, x, y, 0x000000);
-			else if (color < fractal->max_iter / 2)
-				img_pix_put(&data->img, x, y, 0xff * color / fractal->max_iter * 10);
 			else
-				img_pix_put(&data->img, x, y, 0xff * color / fractal->max_iter);
+				img_pix_put(&data->img, x, y, get_color(color, fractal->max_iter));
 		}
 	}
-	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	return (0);
 }
 

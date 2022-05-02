@@ -24,13 +24,14 @@ void	init_fractal(t_fractal *fractal)
 	fractal->min.im = -2.0;
 	fractal->max.re = 2.0;
 	fractal->max.im = 2.0;
-	fractal->max_iter = 90;
+	fractal->max_iter = 100;	
 }
 
 int	main(int ac, char **av)
 {
 	t_data		data;
 	t_fractal	fractol;
+	//char *name;
 
 	if (ac == 2)
 	{
@@ -41,7 +42,10 @@ int	main(int ac, char **av)
 		if (!ft_strcmp(av[1], "Mandelbrot"))
 			mlx_loop_hook(data.mlx_ptr, &render_man, &data);
 		else if (!ft_strcmp(av[1], "Julia"))
+		{
+			init_julia(&fractol);
 			mlx_loop_hook(data.mlx_ptr, &render_julia, &data);
+		}
 		else if (!ft_strcmp(av[1], "Mandelbar"))
 			mlx_loop_hook(data.mlx_ptr, &render_mandelbar, &data);
 		else if (!ft_strcmp(av[1], "P"))
@@ -55,6 +59,7 @@ int	main(int ac, char **av)
 			fractol_usage();
 			exit(0);
 		}
+		//init_set(&data, av[1]);
 		//init_events(&data);
 		mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 		mlx_hook(data.win_ptr, 17, 0L, &ft_red_cross, &data);

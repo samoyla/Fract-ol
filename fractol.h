@@ -67,7 +67,7 @@ typedef struct s_data
 	void		*win_ptr;
 	t_img		img;
 	t_fractal	*fractal;
-	int	*tab;
+	int			*tab;
 }t_data;
 
 typedef struct s_rect
@@ -83,6 +83,7 @@ typedef struct s_rect
 void	init_fractal(t_fractal *fractal);
 t_data	*init_data(t_data *data, char *name);
 t_data	*init_image(t_data *data);
+void	init_set(t_data *data, char *av);
 
 void	init_mandelbrot(t_fractal *fractal);
 int		mandelbrot(t_fractal *fractal, t_cxnb c);
@@ -114,16 +115,14 @@ int		*draw_celtic(t_fractal *fractal, t_data *data);
 int		render_celtic(t_data *data);
 //draw
 void	img_pix_put(t_img *img, int x, int y, int color);
-int		render_rect(t_img *img, t_rect rect);
-void	render_background(t_img *img, int color);
-int		render(t_data *data);
-int		render2(t_data *data);
 
 void	bzero_tab(int *tab);
-void	color_split(t_data *data, int i, int x, int y);
+
+void	init_tab(t_data *data);
 int		put_colors(t_data *data, int i, int x, int y);
 int		choose_color(t_data *data);
-int		colors(int i, int i_max);
+int		get_color(int i, int i_max);
+int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 
 //events - hooks
 int		handle_keypress(int keysym, t_data *data);

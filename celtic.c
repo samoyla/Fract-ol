@@ -24,7 +24,7 @@ int	celtic(t_fractal *fractal, t_cxnb c)
 	while ((pow(z.re, 2.0) + pow(z.im, 2.0)) < 4 && iter < fractal->max_iter)
 	{
 		tmp = fabs(pow(z.re, 2.0) - pow(z.im, 2.0)) + c.re;
-		z.im = -2.0 * z.re * z.im + c.im;
+		z.im = 2.0 * z.re * z.im + c.im;
 		z.re = tmp;
 		++iter;
 	}
@@ -56,10 +56,8 @@ int	*draw_celtic(t_fractal *fractal, t_data *data)
 			color = celtic(fractal, c);
 			if (color == -1)
 				img_pix_put(&data->img, x, y, 0x000000);
-			else if (color < fractal->max_iter / 2)
-				img_pix_put(&data->img, x, y, 0xff * color / fractal->max_iter * 10);
 			else
-				img_pix_put(&data->img, x, y, 0xff * color / fractal->max_iter);
+				img_pix_put(&data->img, x, y, get_color(color, fractal->max_iter));
 		}
 	}
 	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);

@@ -18,9 +18,7 @@ void	init_julia(t_fractal *fractal)
 	fractal->min.im = -2.0;
 	fractal->max.re = 2.0;
 	fractal->max.im = 2.0;
-	//fractal->max.im = fractal->max.im +(fractal->max.re - fractal->min.re)
-	//					* HEIGHT / WIDTH;
-	fractal->max_iter = 150;
+	fractal->max_iter = 100;
 	fractal->k.re = -0.4;
 	fractal->k.im = 0.6;
 }
@@ -81,13 +79,10 @@ int	*draw_julia(t_fractal *fractal, t_data *data)
 			color = julia(fractal);
 			if (color == -1)
 				img_pix_put(&data->img, x, y, 0x000000);
-			else if (color > 0 && color < 20)
-				img_pix_put(&data->img, x, y, ORANGE);
 			else
-				img_pix_put(&data->img, x, y, 0xffffff);
+				img_pix_put(&data->img, x, y, get_color(color, fractal->max_iter));
 		}
 	}
-	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	return (0);
 }
 

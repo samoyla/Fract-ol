@@ -6,7 +6,7 @@
 /*   By: masamoil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 15:44:20 by masamoil          #+#    #+#             */
-/*   Updated: 2022/03/04 15:44:22 by masamoil         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:08:40 by masamoil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,24 @@ void	init_events(t_data *data)
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 	mlx_hook(data->win_ptr, 17, 0L, &ft_red_cross, &data);
 }
+
+/*void	init_set(t_data *data, char *av)
+{
+	if (!ft_strcmp(av, "Mandelbrot"))
+		mlx_loop_hook(data->mlx_ptr, &render_man, &data);
+	else if (!ft_strcmp(av, "Julia"))
+		mlx_loop_hook(data->mlx_ptr, &render_julia, &data);
+	else if (!ft_strcmp(av, "Mandelbar"))
+		mlx_loop_hook(data->mlx_ptr, &render_mandelbar, &data);
+	else if (!ft_strcmp(av, "P"))
+		mlx_loop_hook(data->mlx_ptr, &render_perpend, &data);
+	else if (!ft_strcmp(av, "Burning Ship"))
+		mlx_loop_hook(data->mlx_ptr, &render_ship, &data);
+	else if (!ft_strcmp(av, "Celtic"))
+		mlx_loop_hook(data->mlx_ptr, &render_celtic, &data);
+	else
+	{
+		fractol_usage();
+		exit(0);
+	}
+}*/
