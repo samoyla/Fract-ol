@@ -31,31 +31,24 @@ int	get_color(int i, int i_max)
 	return (encode_rgb(red, green, blue));
 }
 
-/*int	get_color(int i, t_data *data)
+void	img_pix_put(t_img *img, int x, int y, int color)
 {
-	return (data->tab[i]);
-}
+	char	*pixel;
+	int		i;
 
-void	init_tab(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	data->tab = malloc(sizeof(int *) * data->fractal->max_iter);
-	if (!data->tab)
-		return (NULL);
-	while (i < data->fractal->max_iter)
+	if (x >= WIDTH || x < 0 || y >= HEIGHT || y < 0)
 	{
-		if (i < 20)
-			data->tab[i] = FLORAL_WHITE;
-		else if (i > 19 && i < 40)
-			data->tab[i] = ALICE_BLUE;
-		else if (i > 39 && i < 60)
-			data->tab[i] = LAVENDER;
-		else if (i > 59 && i < 80)
-			data->tab[i] = AZURE;
-		else
-			data->tab[i] = MIDNIGHT_BLUE;
+		ft_putstr_fd("can't reach this pixel\n", 2);
+		return ;
 	}
-	return (0);
-}*/
+	i = img->bpp - 8;
+	pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
+	while (i >= 0)
+	{
+		if (img->endian != 0)
+			*pixel++ = (color >> i) & 255;
+		else
+			*pixel++ = (color >> (img->bpp - 8 - i)) & 255;
+		i -= 8;
+	}
+}

@@ -12,39 +12,12 @@
 
 #include "fractol.h"
 
-void	init_julia(t_fractal *fractal)
-{
-	fractal->min.re = -2.0;
-	fractal->min.im = -2.0;
-	fractal->max.re = 2.0;
-	fractal->max.im = 2.0;
-	fractal->max_iter = 100;
-	fractal->k.re = -0.4;
-	fractal->k.im = 0.6;
-}
-
-/*int julia_motion(t_fractal *fractal, t_data *data)
-{
-	int x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	fractal->k.re = 4 * ((double)x / WIDTH - 0.5);
-	fractal->k.im = 4 * ((double)(HEIGHT - y) / HEIGHT - 0.5);
-	draw_julia(fractal, data);
-	return (0);
-}*/
-
-int	julia(t_fractal *fractal)
+int	julia(t_fractal *fractal, t_cxnb z)
 {
 	int		iter;
 	double	tmp;
-	t_cxnb	z;
 
 	iter = 0;
-	z.re = 0;
-	z.im = 0;
 	while ((pow(z.re, 2.0) + pow(z.im, 2.0)) < 4 && iter < fractal->max_iter)
 	{
 		tmp = pow(z.re, 2.0) - pow(z.im, 2.0) + fractal->k.re;
@@ -65,7 +38,6 @@ int	*draw_julia(t_fractal *fractal, t_data *data)
 	int		x;
 	int		y;
 
-	color = 0;
 	y = 0;
 	while (++y < HEIGHT)
 	{
@@ -73,13 +45,14 @@ int	*draw_julia(t_fractal *fractal, t_data *data)
 		while (++x < WIDTH)
 		{
 			c.re = x * ((fractal->max.re - fractal->min.im)
-					/ WIDTH) + fractal->min.re;
+					/ (WIDTH)) + fractal->min.re;
 			c.im = (-1 * y) * ((fractal->max.im - fractal->min.im)
-					/ HEIGHT) + fractal->max.im;
-			color = julia(fractal);
+					/ (HEIGHT)) + fractal->max.im;
+			color = julia(fractal, c);
 			if (color == -1)
 				img_pix_put(&data->img, x, y, 0x000000);
 			else
+				//img_pix_put(&data->img, x, y, GHOST_WHITE);
 				img_pix_put(&data->img, x, y, get_color(color, fractal->max_iter));
 		}
 	}

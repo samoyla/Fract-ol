@@ -30,11 +30,11 @@ t_data	*init_data(t_data *data, char *name)
 	return (data);
 }
 
-t_data *init_image(t_data *data)
+t_data	*init_image(t_data *data)
 {
 	data->img.img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp,
-					&data->img.line_length, &data->img.endian);
+			&data->img.line_length, &data->img.endian);
 	return (data);
 }
 

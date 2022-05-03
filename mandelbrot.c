@@ -46,7 +46,6 @@ int	*draw_mandelbrot(t_fractal *fractal, t_data *data)
 	z.re = 0;
 	z.im = 0;
 	y = 0;
-	//data->tab = init_tab(data);
 	while (++y < HEIGHT)
 	{
 		c.im = (-1 * y) * ((fractal->max.im - fractal->min.im) / HEIGHT) + fractal->max.im;

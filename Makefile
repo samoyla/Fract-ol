@@ -1,8 +1,9 @@
 NAME = fractol
 
-SRCS	= main.c events.c fct_render.c utils.c\
-			mandelbrot.c init.c julia.c color.c\
-			mandelbar.c perpend.c burning_ship.c celtic.c
+SRCS	= main.c events.c init.c utils.c zoom.c\
+			mandelbrot.c julia.c color.c\
+			mandelbar.c perpend.c burning_ship.c celtic.c\
+			
 
 OBJS = ${SRCS:.c=.o}
 
