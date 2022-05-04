@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   events_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masamoil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 11:14:59 by masamoil          #+#    #+#             */
-/*   Updated: 2022/04/26 11:15:06 by masamoil         ###   ########.fr       */
+/*   Created: 2022/05/04 16:03:16 by masamoil          #+#    #+#             */
+/*   Updated: 2022/05/04 16:03:20 by masamoil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 int	handle_keypress(int keysym, t_data *data)
 {
@@ -18,8 +18,8 @@ int	handle_keypress(int keysym, t_data *data)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		data->win_ptr = NULL;
-		ft_putstr_fd("That's all, folks!\n", 1);
 	}
+	ft_putstr_fd("That's all, folks!\n", 1);
 	return (0);
 }
 

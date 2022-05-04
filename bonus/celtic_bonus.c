@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   celtic_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masamoil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 09:14:34 by masamoil          #+#    #+#             */
-/*   Updated: 2022/05/02 09:14:42 by masamoil         ###   ########.fr       */
+/*   Created: 2022/05/04 16:03:03 by masamoil          #+#    #+#             */
+/*   Updated: 2022/05/04 16:03:07 by masamoil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
-int	mandelbrot(t_fractal *fractal, t_cxnb c)
+int	celtic(t_fractal *fractal, t_cxnb c)
 {
 	int		iter;
 	double	tmp;
@@ -23,7 +23,7 @@ int	mandelbrot(t_fractal *fractal, t_cxnb c)
 	z.im = 0;
 	while ((pow(z.re, 2.0) + pow(z.im, 2.0)) < 4 && iter < fractal->max_iter)
 	{
-		tmp = pow(z.re, 2.0) - pow(z.im, 2.0) + c.re;
+		tmp = fabs(pow(z.re, 2.0) - pow(z.im, 2.0)) + c.re;
 		z.im = 2.0 * z.re * z.im + c.im;
 		z.re = tmp;
 		++iter;
@@ -34,7 +34,7 @@ int	mandelbrot(t_fractal *fractal, t_cxnb c)
 		return (iter);
 }
 
-int	*draw_mandelbrot(t_fractal *fr, t_data *data)
+int	*draw_celtic(t_fractal *fr, t_data *data)
 {
 	t_cxnb	c;
 	t_cxnb	z;
@@ -53,7 +53,7 @@ int	*draw_mandelbrot(t_fractal *fr, t_data *data)
 		while (++x < WIDTH)
 		{
 			c.re = x * ((fr->max.re - fr->min.re) / (WIDTH)) + fr->min.re;
-			color = mandelbrot(fr, c);
+			color = celtic(fr, c);
 			if (color == -1)
 				img_pix_put(&data->img, x, y, 0x000000);
 			else
@@ -63,11 +63,11 @@ int	*draw_mandelbrot(t_fractal *fr, t_data *data)
 	return (0);
 }
 
-int	render_man(t_data *data)
+int	render_celtic(t_data *data)
 {
 	if (data->win_ptr == NULL)
 		return (1);
-	draw_mandelbrot(data->fractal, data);
+	draw_celtic(data->fractal, data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	return (0);
 }

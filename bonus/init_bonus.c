@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masamoil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/04 15:44:20 by masamoil          #+#    #+#             */
-/*   Updated: 2022/05/02 16:08:40 by masamoil         ###   ########.fr       */
+/*   Created: 2022/05/04 16:03:31 by masamoil          #+#    #+#             */
+/*   Updated: 2022/05/04 16:03:35 by masamoil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 t_data	*init_data(t_data *data, char *name)
 {
@@ -42,7 +42,6 @@ void	init_events(t_data *data)
 {
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 	mlx_hook(data->win_ptr, 17, 0L, &ft_red_cross, &data);
-	mlx_hook(data->win_ptr, ButtonPress, ButtonPressMask, &ft_zoom, &data);
 }
 
 //void	destroy();

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractol_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masamoil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/28 19:36:23 by masamoil          #+#    #+#             */
-/*   Updated: 2022/03/04 14:44:06 by masamoil         ###   ########.fr       */
+/*   Created: 2022/05/04 15:54:28 by masamoil          #+#    #+#             */
+/*   Updated: 2022/05/04 15:54:36 by masamoil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FRACTOL_BONUS_H
+# define FRACTOL_BONUS_H
 
-# include "mlx/mlx.h"
+# include "../mlx/mlx.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
@@ -84,6 +84,25 @@ int		julia(t_fractal *fractal, t_cxnb z);
 int		*draw_julia(t_fractal *fractal, t_data *data);
 int		render_julia(t_data *data);
 
+void	init_mandelbar(t_fractal *fractal);
+int		mandelbar(t_fractal *fractal, t_cxnb c);
+int		*draw_mandelbar(t_fractal *fractal, t_data *data);
+int		render_mandelbar(t_data *data);
+
+void	init_perpend(t_fractal *fractal);
+int		perpend(t_fractal *fractal, t_cxnb c);
+int		*draw_perpend(t_fractal *fractal, t_data *data);
+int		render_perpend(t_data *data);
+
+void	init_ship(t_fractal *fractal);
+int		ship(t_fractal *fractal, t_cxnb c);
+int		*draw_ship(t_fractal *fractal, t_data *data);
+int		render_ship(t_data *data);
+
+int		celtic(t_fractal *fractal, t_cxnb c);
+int		*draw_celtic(t_fractal *fractal, t_data *data);
+int		render_celtic(t_data *data);
+//draw
 void	img_pix_put(t_img *img, int x, int y, int color);
 //color
 int		get_color(int i, int i_max);

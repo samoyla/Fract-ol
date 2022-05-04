@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbar.c                                        :+:      :+:    :+:   */
+/*   mandelbar_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masamoil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 10:24:33 by masamoil          #+#    #+#             */
-/*   Updated: 2022/05/02 10:24:35 by masamoil         ###   ########.fr       */
+/*   Created: 2022/05/04 16:05:55 by masamoil          #+#    #+#             */
+/*   Updated: 2022/05/04 16:05:58 by masamoil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 int	mandelbar(t_fractal *fractal, t_cxnb c)
 {
@@ -34,7 +34,7 @@ int	mandelbar(t_fractal *fractal, t_cxnb c)
 		return (iter);
 }
 
-int	*draw_mandelbar(t_fractal *fractal, t_data *data)
+int	*draw_mandelbar(t_fractal *fr, t_data *data)
 {
 	t_cxnb	c;
 	t_cxnb	z;
@@ -48,16 +48,16 @@ int	*draw_mandelbar(t_fractal *fractal, t_data *data)
 	y = 0;
 	while (++y < HEIGHT)
 	{
-		c.im = (-1 * y) * ((fractal->max.im - fractal->min.im) / HEIGHT) + fractal->max.im;
+		c.im = (-1 * y) * ((fr->max.im - fr->min.im) / HEIGHT) + fr->max.im;
 		x = 0;
 		while (++x < WIDTH)
 		{
-            c.re = x * ((fractal->max.re - fractal->min.re) / (WIDTH)) + fractal->min.re;
-			color = mandelbar(fractal, c);
+			c.re = x * ((fr->max.re - fr->min.re) / (WIDTH)) + fr->min.re;
+			color = mandelbar(fr, c);
 			if (color == -1)
 				img_pix_put(&data->img, x, y, 0x000000);
 			else
-				img_pix_put(&data->img, x, y, get_color(color, fractal->max_iter));
+				img_pix_put(&data->img, x, y, get_color(color, fr->max_iter));
 		}
 	}
 	return (0);

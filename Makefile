@@ -1,11 +1,19 @@
 NAME = fractol
 
+NAME_BONUS = fractol_bonus
+
 SRCS	= main.c events.c init.c utils.c zoom.c\
-			mandelbrot.c julia.c color.c\
-			mandelbar.c perpend.c burning_ship.c celtic.c\
+			mandelbrot.c julia.c color.c
 			
+SRCS_BONUS = ./bonus/main_bonus.c ./bonus/events_bonus.c ./bonus/init_bonus.c\
+			./bonus/utils_bonus.c ./bonus/zoom_bonus.c ./bonus/color_bonus.c\
+			./bonus/mandelbrot_bonus.c ./bonus/julia_bonus.c\
+			./bonus/mandelbar_bonus.c ./bonus/perpendicular_mandelbrot_bonus.c\
+			./bonus/burning_ship_bonus.c ./bonus/celtic_bonus.c
 
 OBJS = ${SRCS:.c=.o}
+
+OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
 CC = clang
 
@@ -24,11 +32,18 @@ $(NAME) : $(OBJS)
 %.o:%.c
 	${CC} ${FLAGS} -Imlx -Ibass -o $@ -c $<
 
+bonus: ${OBJS_BONUS} 
+	make -s -C ./mlx
+	${CC} ${CFLAGS} -Imlx ${SRCS_BONUS} -o ${NAME_BONUS} $(FL_MLX)
+
 clean :
-	${RM} ${OBJS} ${OBJS_BONUS}
+	${RM} ${OBJS}
 
 fclean : clean
-	${RM} ${NAME} ${NAME_BONUS}
+	${RM} ${NAME}
+
+clean_bonus :
+	${RM} ${NAME_BONUS} ${OBJS_BONUS}
 
 re : fclean all
 
