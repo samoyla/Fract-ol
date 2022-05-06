@@ -37,13 +37,13 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-void	fractol_usage(void)
+void	fractol_usage_bonus(void)
 {
 	ft_putstr_fd("usage: ./fractol fractal_set_name\n", 1);
 	ft_putstr_fd("Choose your set:\n", 1);
-	ft_putstr_fd("- Mandelbrot\n- Julia\n", 1);
-	ft_putstr_fd("- Mandelbar\n- Burning Ship\n", 1);
-	ft_putstr_fd("- Perpendicular M\n", 1);
+	ft_putstr_fd("- Mandelbrot\n- Julia or Julia P1 P2\n", 1);
+	ft_putstr_fd("- Mandelbar\n- Perpendicular\n", 1);
+	ft_putstr_fd("- BurningShip\n- Celtic\n", 1);
 }
 
 void	ft_error(void)
@@ -51,4 +51,3 @@ void	ft_error(void)
 	perror("Error:");
 	exit(EXIT_FAILURE);
 }
-

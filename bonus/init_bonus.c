@@ -44,25 +44,24 @@ void	init_events(t_data *data)
 	mlx_hook(data->win_ptr, 17, 0L, &ft_red_cross, &data);
 }
 
-//void	destroy();
-
-/*void	init_set(t_data *data, char *av)
+int	render_set(t_data *data)
 {
-	if (!ft_strcmp(av, "Mandelbrot"))
-		mlx_loop_hook(data->mlx_ptr, &render_man, &data);
-	else if (!ft_strcmp(av, "Julia"))
-		mlx_loop_hook(data->mlx_ptr, &render_julia, &data);
-	else if (!ft_strcmp(av, "Mandelbar"))
-		mlx_loop_hook(data->mlx_ptr, &render_mandelbar, &data);
-	else if (!ft_strcmp(av, "P"))
-		mlx_loop_hook(data->mlx_ptr, &render_perpend, &data);
-	else if (!ft_strcmp(av, "Burning Ship"))
-		mlx_loop_hook(data->mlx_ptr, &render_ship, &data);
-	else if (!ft_strcmp(av, "Celtic"))
-		mlx_loop_hook(data->mlx_ptr, &render_celtic, &data);
+	if (!ft_strcmp(data->av, "Mandelbrot"))
+		render_man(data);
+	else if (!ft_strcmp(data->av, "Julia"))
+		render_julia(data);
+	else if (!ft_strcmp(data->av, "Mandelbar"))
+		render_mandelbar(data);
+	else if (!ft_strcmp(data->av, "Perpendicular"))
+		render_perpend(data);
+	else if (!ft_strcmp(data->av, "BurningShip"))
+		render_ship(data);
+	else if (!ft_strcmp(data->av, "Celtic"))
+		render_celtic(data);
 	else
 	{
-		fractol_usage();
+		fractol_usage_bonus();
 		exit(0);
 	}
-}*/
+	return (0);
+}

@@ -25,10 +25,14 @@
 # include <X11/X.h>
 # include <X11/Xlib.h>
 
+# define TRUE	1
+# define FALSE	0
 # define TITLE "My Fractol"
 # define WIDTH 800
 # define HEIGHT 800
 # define MAX_ITER 50
+
+typedef int8_t	t_bool;
 
 //mlx data about image
 typedef struct s_img
@@ -61,13 +65,18 @@ typedef struct s_data
 	void		*win_ptr;
 	t_img		img;
 	t_fractal	*fractal;
+	char		*av;
+	int			ac;
 }t_data;
 
 //fractals
 void	init_fractal(t_fractal *fractal);
 t_data	*init_data(t_data *data, char *name);
 t_data	*init_image(t_data *data);
-void	init_set(t_data *data, char *av);
+int		render_set(t_data *data);
+void	ft_free_and_destroy(t_data *data);
+int		check_args(t_data *data, char **av);
+int		check_id(char *av);
 
 void	zoom_in(t_fractal *fractal);
 void	zoom_out(t_fractal *fractal);
@@ -112,10 +121,14 @@ int		handle_keypress(int keysym, t_data *data);
 int		ft_red_cross(t_data *data);
 void	init_events(t_data *data);
 //utils
+void	fractol_usage_bonus(void);
 void	ft_putstr_fd(char *s, int fd);
 int		ft_strcmp(const char *s1, const char *s2);
-void	fractol_usage(void);
 void	ft_error(void);
-//double	ft_atof(const char *nptr);
+size_t	ft_strlen(const char *s);
+double	ft_atof(char *str);
+t_bool	ft_is_charset(const char *str, char *charset);
+t_bool	ft_c_in_charset(char c, char *charset);
+int		ft_atoi(const char *nptr);
 
 #endif
