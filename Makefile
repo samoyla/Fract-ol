@@ -43,7 +43,7 @@ $(NAME) : $(OBJS)
 	${CC} ${CFLAGS} -Imlx ${SRCS} -o ${NAME} $(FL_MLX)
 
 %.o:%.c
-	${CC} ${FLAGS} -Imlx -Ibass -o $@ -c $<
+	${CC} ${CFLAGS} -Imlx -Ibass -o $@ -c $<
 
 bonus: ${OBJS_BONUS} 
 	make -s -C ./mlx
