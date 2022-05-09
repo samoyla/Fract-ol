@@ -27,7 +27,6 @@
 
 # define TRUE	1
 # define FALSE	0
-# define TITLE "My Fractol"
 # define WIDTH 800
 # define HEIGHT 800
 # define MAX_ITER 50
@@ -73,16 +72,12 @@ typedef struct s_data
 void	init_fractal(t_fractal *fractal);
 t_data	*init_data(t_data *data, char *name);
 t_data	*init_image(t_data *data);
-int		render_set(t_data *data);
-void	ft_free_and_destroy(t_data *data);
 int		check_args(t_data *data, char **av);
 int		check_id(char *av);
-
-void	zoom_in(t_fractal *fractal);
-void	zoom_out(t_fractal *fractal);
-void	zoom_reset(t_fractal *fractal);
-int		ft_zoom(int mouseclick, int x, int y, t_data *data);
-
+int		render_set(t_data *data);
+void	fractol_usage_bonus(void);
+void	ft_free_and_destroy(t_data *data);
+//fractals drawing
 void	init_mandelbrot(t_fractal *fractal);
 int		mandelbrot(t_fractal *fractal, t_cxnb c);
 int		*draw_mandelbrot(t_fractal *fractal, t_data *data);
@@ -111,7 +106,7 @@ int		render_ship(t_data *data);
 int		celtic(t_fractal *fractal, t_cxnb c);
 int		*draw_celtic(t_fractal *fractal, t_data *data);
 int		render_celtic(t_data *data);
-//draw
+
 void	img_pix_put(t_img *img, int x, int y, int color);
 //color
 int		get_color(int i, int i_max);
@@ -119,9 +114,12 @@ int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 //events - hooks
 int		handle_keypress(int keysym, t_data *data);
 int		ft_red_cross(t_data *data);
-void	init_events(t_data *data);
+int		ft_zoom(int mouseclick, int x, int y, t_data *data);
+//zoom
+void	zoom_in(t_fractal *fractal);
+void	zoom_out(t_fractal *fractal);
+void	zoom_reset(t_fractal *fractal);
 //utils
-void	fractol_usage_bonus(void);
 void	ft_putstr_fd(char *s, int fd);
 int		ft_strcmp(const char *s1, const char *s2);
 void	ft_error(void);

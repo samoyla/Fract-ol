@@ -12,6 +12,17 @@
 
 #include "fractol.h"
 
+void	init_fractal(t_fractal *fractal)
+{
+	fractal->min.re = -2.0;
+	fractal->min.im = -2.0;
+	fractal->max.re = 2.0;
+	fractal->max.im = 2.0;
+	fractal->max_iter = MAX_ITER;
+	fractal->k.re = -0.4;
+	fractal->k.im = 0.6;
+}
+
 t_data	*init_data(t_data *data, char *name)
 {
 	data->mlx_ptr = mlx_init();
@@ -36,13 +47,6 @@ t_data	*init_image(t_data *data)
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp,
 			&data->img.line_length, &data->img.endian);
 	return (data);
-}
-
-void	init_events(t_data *data)
-{
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
-	mlx_hook(data->win_ptr, 17, 0L, &ft_red_cross, &data);
-	mlx_hook(data->win_ptr, ButtonPress, ButtonPressMask, &ft_zoom, &data);
 }
 
 int	render_set(t_data *data)

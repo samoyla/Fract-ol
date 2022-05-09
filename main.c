@@ -12,17 +12,6 @@
 
 #include "fractol.h"
 
-void	init_fractal(t_fractal *fractal)
-{
-	fractal->min.re = -2.0;
-	fractal->min.im = -2.0;
-	fractal->max.re = 2.0;
-	fractal->max.im = 2.0;
-	fractal->max_iter = MAX_ITER;
-	fractal->k.re = -0.4;
-	fractal->k.im = 0.6;
-}
-
 int	main(int ac, char **av)
 {
 	t_data		data;

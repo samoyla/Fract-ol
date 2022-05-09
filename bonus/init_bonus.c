@@ -38,12 +38,6 @@ t_data	*init_image(t_data *data)
 	return (data);
 }
 
-void	init_events(t_data *data)
-{
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
-	mlx_hook(data->win_ptr, 17, 0L, &ft_red_cross, &data);
-}
-
 int	render_set(t_data *data)
 {
 	if (!ft_strcmp(data->av, "Mandelbrot"))

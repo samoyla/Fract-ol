@@ -87,7 +87,7 @@ double	ft_atof(char *str)
 		ft_putstr_fd("ft_atof: invalid input\n", 2);
 		return (0.0);
 	}
-	result = (float)ft_atoi(str);
+	result = (double)ft_atoi(str);
 	while (str[i] && str[i] != '.')
 		++i;
 	if (str[i] == '.' && str[i + 1])
